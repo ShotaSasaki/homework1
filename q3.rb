@@ -1,0 +1,24 @@
+$guest = {you: 'あなた', computer: 'コンピューター'}
+
+def check_janken(a, b)
+  if (a == 0 && b == 1) || (a == 1 && b == 2) || (a == 2 && b == 0)
+    result = "#{$guest[:you]}の勝ち"
+  elsif (b == 0 && a == 1) || (b == 1 && a == 2) || (b == 2 && a == 0)
+    result = "#{$guest[:computer]}の勝ち"
+  elsif a == b
+    result = "引き分け"
+  end
+
+  return result
+end
+
+kind = {0=>'グー', 1=>'チョキ', 2=>'パー'}
+while(true)
+  print "グーは0, チョキは1, パーは2 を入力してください:"
+  input = gets.to_i
+  random = rand(3)
+  puts "#{$guest[:computer]}:#{kind[random]}"
+  puts "#{$guest[:you]}:#{kind[input]}"
+
+  puts "勝敗 = #{check_janken(input, random)}"
+end
