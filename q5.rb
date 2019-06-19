@@ -1,5 +1,17 @@
 GUEST = {you: 'あなた', computer: 'コンピューター'}
 KIND = {0=>'グー', 1=>'チョキ', 2=>'パー'}
+KIND_FULLNAME = {'guu'=>0, 'choki'=>1, 'pa'=>2}
+KIND_SHORTNAME = {'g'=>0, 'c'=>1, 'p'=>2}
+
+def validation(input)
+  if KIND_FULLNAME.key?(input)
+    return KIND_FULLNAME[input].to_i
+  elsif KIND_SHORTNAME.key?(input)
+    return KIND_SHORTNAME[input].to_i
+  elsif input =~ /^[0-9]+$/
+    return input.to_i
+  end
+end
 
 def judge(you, computer)
   if you == computer
@@ -12,19 +24,11 @@ def judge(you, computer)
 end
 
 while(true)
-  print "グーは0, チョキは1, パーは2 を入力してください:"
-  input = gets.chomp
-  if input == "exit"
-    exit!
-  end
-  unless input =~ /^[0-9]+$/ && input.to_i.between?(0,2) then
-    puts "入力が正しくありません"
-    next
-  end
-  
+  print "guu,choki,paを入力してください:"
+  input = validation(gets.chomp)
   random = rand(3)
   puts "#{GUEST[:computer]}:#{KIND[random]}"
-  puts "#{GUEST[:you]}:#{KIND[input.to_i]}"
+  puts "#{GUEST[:you]}:#{KIND[input]}"
 
-  puts "勝敗 = #{judge(input.to_i, random)}"
+  puts "勝敗 = #{judge(input, random)}"
 end
