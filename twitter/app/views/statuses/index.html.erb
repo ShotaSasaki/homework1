@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= link_to image_tag("twitter.jpg", :size => "150x100"), statuses_path %></h1>
+
+
+<div>
+  <div><%= link_to 'ホーム', statuses_path %></div>
+  <div><%= link_to 'フォロー', friendships_path %></div>
+  <div><%= link_to 'プロフィール', users_path %></div>
+</div>
+
+<div>
+  <p>いまなにしてる？</p>
+  <%= form_for(@status, url: statuses_path) do |form| %>
+    <%= form.text_field :text %>
+    <%= form.submit "投稿" %>
+  <% end %>
+</div>
+
+<br/>
+
+<table>
+  <tbody>
+    <tr>つぶやき</tr>
+    <% @statuses.each do |status| %>
+      <tr>
+        <td><%= image_tag(status.user.profile_image_path, :size => "50x50") %></td>
+        <td><%= status.user.screen_name %></td>
+        <td><%= status.text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'ログアウト', login_path(0), method: :delete %>

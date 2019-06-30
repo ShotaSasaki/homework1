@@ -1,0 +1,37 @@
+<head>
+  <style>
+  .left{
+    float: left;
+    width: 10%;
+  }
+  .right{
+    float: right;
+    width: 90%;
+    text-align: left;
+  }
+  </style>
+</head>
+
+<p id="notice"><%= notice %></p>
+
+<div>
+  <% @users.each do |user| %>
+  <div>
+    <%= image_tag(user.profile_image_path, :size => "50x50") %>
+  </div>
+  <div>
+    <h1><%= "@#{user.screen_name}" %></h1>
+  </div>
+  <% end %>
+  <% @statuses.each do |status| %>
+  <div>
+    <div class="left"><%= image_tag(status.user.profile_image_path, :size => "50x50") %></div>
+    <div class="right">
+      <p><%= "@#{status.user.screen_name}" %></p>
+      <%= status.text %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<br>
+<p><%= link_to 'Back', statuses_path %></p>
