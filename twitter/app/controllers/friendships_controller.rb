@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
-    @friendships = Friendship.all
+    @friendships = Friendship.where.not(friend_id: session[:login])
   end
 
   # GET /friendships/1
@@ -70,6 +70,6 @@ class FriendshipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def friendship_params
-      params.require(:friendship).permit(:friend_id)
+      params.require(:friendship).permit(:user_id, :friend_id)
     end
 end

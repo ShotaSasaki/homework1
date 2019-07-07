@@ -26,6 +26,7 @@ class StatusesController < ApplicationController
   # POST /statuses.json
   def create
     @status = Status.new(status_params)
+    p @status
 
     if @status.save
       redirect_to statuses_path

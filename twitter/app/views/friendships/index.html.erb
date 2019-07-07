@@ -12,7 +12,8 @@
   <tbody>
     <% @friendships.each do |friendship| %>
       <tr>
-        <td><%= friendship.friend %></td>
+        <td><%= image_tag(friendship.friend.profile_image_path, :size => "50x50") %></td>  
+        <td><%= friendship.friend.screen_name %></td>  
         <td><%= link_to 'Show', friendship %></td>
         <td><%= link_to 'Destroy', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -21,5 +22,4 @@
 </table>
 
 <br>
-
-<%= link_to 'Back', statuses_path %>
+<%= link_to '戻る', statuses_path %>
